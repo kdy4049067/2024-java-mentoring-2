@@ -1,7 +1,6 @@
 package Lotto.domain;
 
 import Lotto.common.exception.ExceptionMessage;
-import Lotto.dto.LottoDto;
 
 public class LottoNumber {
 

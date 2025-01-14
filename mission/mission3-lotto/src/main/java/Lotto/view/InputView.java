@@ -1,12 +1,8 @@
 package Lotto.view;
 
 import Lotto.common.displayText.DisplayText;
-import Lotto.common.exception.ExceptionMessage;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
 

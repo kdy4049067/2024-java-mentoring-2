@@ -1,7 +1,6 @@
 package Lotto.view;
 
 import Lotto.common.displayText.DisplayText;
-import Lotto.common.exception.ExceptionMessage;
 
 public class OutputView {
 
