@@ -45,4 +45,10 @@ public enum WinningResult {
         this.prizeCount++;
     }
 
+    public void matchAndIncrement(Long matchCount){
+        if(this.getMatchCount() == matchCount){
+            this.incrementPrizeCount();
+        }
+    }
+
 }

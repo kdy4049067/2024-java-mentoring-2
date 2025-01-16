@@ -23,14 +23,9 @@ public class Winning {
     }
 
     public void matchWinningResult(Long matchCount){
-        if(matchCount == WinningResult.FIRST_PRICE.getMatchCount())
-            WinningResult.FIRST_PRICE.incrementPrizeCount();
-        if(matchCount == WinningResult.SECOND_PRICE.getMatchCount())
-            WinningResult.SECOND_PRICE.incrementPrizeCount();
-        if(matchCount == WinningResult.THIRD_PRICE.getMatchCount())
-            WinningResult.THIRD_PRICE.incrementPrizeCount();
-        if(matchCount == WinningResult.FOURTH_PRICE.getMatchCount())
-            WinningResult.FOURTH_PRICE.incrementPrizeCount();
+        for (WinningResult result : WinningResult.values()) {
+            result.matchAndIncrement(matchCount);
+        }
     }
 
     public long calculateWinningResult(Lottos lottos, List<LottoNumber> winningNumber){
