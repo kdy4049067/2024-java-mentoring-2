@@ -33,11 +33,6 @@ public class Lottos {
         return inputPrice / Lotto.lottoPrice;
     }
 
-    public void validLottoNumber(int inputPrice){
-        if(inputPrice < Lotto.lottoPrice)
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_LOTTO_NUMBER.getMessage());
-    }
-
     public String printLottoList(){
         return getLottos().stream()
                 .map(lotto -> lotto.toLottoDto().toString())
@@ -48,6 +43,11 @@ public class Lottos {
         return IntStream.range(0, getNumberOfLottos())
                 .mapToObj(i -> new Lotto(randomNumberGenerator))
                 .collect(Collectors.toList());
+    }
+
+    private void validLottoNumber(int inputPrice){
+        if(inputPrice < Lotto.lottoPrice)
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_LOTTO_NUMBER.getMessage());
     }
 
 }

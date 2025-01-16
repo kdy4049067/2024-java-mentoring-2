@@ -4,6 +4,7 @@ import Lotto.common.exception.ExceptionMessage;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Winning {
@@ -17,7 +18,7 @@ public class Winning {
     }
 
     public double calculateProfit(Lottos lottos, Long matchCount){
-        int price = matchPriceAndMatchCount(matchCount);
+        int price = calculatePrice(matchCount).get();
 
         return (double) price / (lottos.getNumberOfLottos() * Lotto.lottoPrice);
     }
@@ -28,27 +29,28 @@ public class Winning {
         }
     }
 
-    public long calculateWinningResult(Lottos lottos, List<LottoNumber> winningNumber){
-        return lottos.getLottos().stream()
-                .mapToLong(lotto -> compareLottoAndWinningNumber(lotto, winningNumber))
-                .max()
-                .orElse(0);
-    }
-
-    private long compareLottoAndWinningNumber(Lotto lotto, List<LottoNumber> winningNumber) {
-        return lotto.getLotto().stream()
-                .filter(lottoNumber -> winningNumber.stream().anyMatch(winning -> lottoNumber.checkSameWinningNumber(winning)))
+    public long calculateWinningResult(List<LottoNumber> winningNumber, List<LottoNumber> lottoNumbers){
+        return lottoNumbers.stream()
+                .filter(lottoNumber -> compareWinningNumber(winningNumber, lottoNumber))
                 .count();
     }
 
-    private int matchPriceAndMatchCount(Long matchCount){
+    private boolean compareWinningNumber(List<LottoNumber> winningNumber, LottoNumber lottoNumber) {
+        return winningNumber.stream()
+                .anyMatch(winning -> winning.checkSameWinningNumber(lottoNumber));
+    }
+
+    private Optional<WinningResult> calculateMatchCount(Long matchCount){
         validateMatchCount(matchCount);
 
         return Arrays.stream(WinningResult.values())
                 .filter(result -> isMatchCountEqual(result, matchCount))
-                .map(WinningResult::getPrice)
-                .findFirst()
-                .orElse(0);
+                .findFirst();
+    }
+
+    private Optional<Integer> calculatePrice(Long matchCount){
+        Optional<WinningResult> winningResult = calculateMatchCount(matchCount);
+        return winningResult.map(WinningResult::getPrice);
     }
 
     private void validateMatchCount(Long matchCount){
