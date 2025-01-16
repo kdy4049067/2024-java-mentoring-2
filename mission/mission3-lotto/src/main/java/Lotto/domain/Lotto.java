@@ -5,6 +5,7 @@ import Lotto.dto.LottoDto;
 import randomNumber.RandomNumberGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,12 +32,21 @@ public class Lotto {
     }
 
     private void duplicateNumber(){
-        long lottoNumber = lotto.stream()
-                .mapToLong(LottoNumber::getLottoNumber)
-                .distinct()
-                .count();
+        long lottoNumber = numberOfNotDuplicatedNumber();
         if(lottoNumber != lottoElementNumber)
             throw new IllegalArgumentException(ExceptionMessage.DUPLICATE_NUMBER.getMessage());
+    }
+
+    private List<Integer> toInteger(){
+        return lotto.stream()
+                .map(LottoNumber::getLottoNumber)
+                .collect(Collectors.toList());
+    }
+
+    private long numberOfNotDuplicatedNumber(){
+        return toInteger().stream()
+                .distinct()
+                .count();
     }
 
 }
