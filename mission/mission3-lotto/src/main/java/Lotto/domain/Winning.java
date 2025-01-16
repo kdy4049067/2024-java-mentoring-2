@@ -1,5 +1,6 @@
 package Lotto.domain;
 
+import Lotto.common.displayText.DisplayText;
 import Lotto.common.exception.ExceptionMessage;
 
 import java.util.Arrays;
@@ -11,8 +12,8 @@ public class Winning {
 
     public String getWinningResult(){
         String resultString = Arrays.stream(WinningResult.values())
-                .map(result -> result.getPrizeMessage() + "- " + result.getPrizeCount())
-                .collect(Collectors.joining("\n"));
+                .map(result -> result.getPrizeMessage() + DisplayText.PRIZE_MESSAGE_SEPARATOR.getInputMessage() + result.getPrizeCount())
+                .collect(Collectors.joining(DisplayText.NEW_LINE.getInputMessage()));
 
         return resultString;
     }

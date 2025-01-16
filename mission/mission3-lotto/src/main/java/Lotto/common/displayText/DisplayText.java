@@ -8,7 +8,9 @@ public enum DisplayText {
     WINNING_RESULT("winningResult", "당첨 통계"),
     WINNING_RESULT_BAR("winningResultBar", "---------"),
     TOTAL_PROFIT("totalProfit", "총 수익률은"),
-    ANNOUNCEMENT("announcement", "입니다.");
+    ANNOUNCEMENT("announcement", "입니다."),
+    PRIZE_MESSAGE_SEPARATOR("prizeMessageSeparator", "-"),
+    NEW_LINE("newLine", "\n");
 
     private String inputName;
     private String inputMessage;

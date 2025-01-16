@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
-    private int inputPrice;
+    private final List<Lotto> lottos;
+    private final int inputPrice;
     private final RandomNumberGenerator randomNumberGenerator;
 
     public Lottos(int inputPrice, RandomNumberGenerator randomNumberGenerator){
