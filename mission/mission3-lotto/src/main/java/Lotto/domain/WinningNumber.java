@@ -14,11 +14,8 @@ public class WinningNumber {
 
     public WinningNumber(String winningNumber){
         isNullWinningNumber(winningNumber);
-        List<Integer> winning = Arrays.stream(winningNumber.split(splitBy))
-                .map(String::trim)
-                .map(this::parseToInteger)
-                .distinct()
-                .collect(Collectors.toList());
+        isEmptyWinningNumber(winningNumber);
+        List<Integer> winning = parseToIntegerNumbers(winningNumber);
 
         validateNumberOfLotto(winning);
 
@@ -54,9 +51,33 @@ public class WinningNumber {
     }
 
     private void isNullWinningNumber(String winningNumber){
-        if(winningNumber == null || winningNumber.trim().isEmpty()){
+        if(winningNumber == null){
             throw new IllegalArgumentException(ExceptionMessage.EMPTY_OR_NULL_WINNING_NUMBER.getMessage());
         }
+    }
+
+    private void isEmptyWinningNumber(String winningNumber){
+        if(winningNumber.trim().isEmpty()){
+            throw new IllegalArgumentException(ExceptionMessage.EMPTY_OR_NULL_WINNING_NUMBER.getMessage());
+        }
+    }
+
+    private String removeSpace(String winningNumbers){
+        return winningNumbers.trim();
+    }
+
+    private List<String> parseInputWinningNumbers(String winningNumbers){
+        return Arrays.stream(removeSpace(winningNumbers).split(splitBy))
+                .toList();
+    }
+
+    private List<Integer> parseToIntegerNumbers(String winningNumbers){
+        List<String> stringNumbers = parseInputWinningNumbers(winningNumbers);
+
+        return stringNumbers.stream()
+                .map(this::parseToInteger)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
 }
