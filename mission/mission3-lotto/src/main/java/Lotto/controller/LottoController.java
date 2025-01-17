@@ -13,12 +13,13 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final RandomNumberGenerator randomNumberGenerator;
-    private final Winning winning = new Winning();
+    private final Winning winning;
 
-    public LottoController(InputView inputView, OutputView outputView, RandomNumberGenerator randomNumberGenerator){
+    public LottoController(InputView inputView, OutputView outputView, RandomNumberGenerator randomNumberGenerator, Winning winning){
         this.inputView = inputView;
         this.outputView = outputView;
         this.randomNumberGenerator = randomNumberGenerator;
+        this.winning = winning;
     }
 
     public void startLotto(){
