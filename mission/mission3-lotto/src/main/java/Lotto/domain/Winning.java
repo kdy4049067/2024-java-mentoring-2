@@ -19,7 +19,7 @@ public class Winning {
     }
 
     public double calculateProfit(int numberOfLotto, Long matchCount){
-        int price = calculatePrice(matchCount).get();
+        int price = calculatePrice(calculateMatchCount(matchCount)).get();
 
         return (double) price / (numberOfLotto * Lotto.lottoPrice);
     }
@@ -49,10 +49,10 @@ public class Winning {
                 .findFirst();
     }
 
-    private Optional<Integer> calculatePrice(Long matchCount){
-        Optional<WinningResult> winningResult = calculateMatchCount(matchCount);
+    private Optional<Integer> calculatePrice(Optional<WinningResult> winningResult) {
         return winningResult.map(WinningResult::getPrice);
     }
+
 
     private void validateMatchCount(Long matchCount){
         if(matchCount < WinningResult.FOURTH_PRICE.getMatchCount())
