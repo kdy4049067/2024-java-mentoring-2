@@ -18,10 +18,10 @@ public class Winning {
         return resultString;
     }
 
-    public double calculateProfit(Lottos lottos, Long matchCount){
+    public double calculateProfit(int numberOfLotto, Long matchCount){
         int price = calculatePrice(matchCount).get();
 
-        return (double) price / (lottos.getNumberOfLottos() * Lotto.lottoPrice);
+        return (double) price / (numberOfLotto * Lotto.lottoPrice);
     }
 
     public void matchWinningResult(Long matchCount){
